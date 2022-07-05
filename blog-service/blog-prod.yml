@@ -1,9 +1,25 @@
-server:
-  port: 8081
-
 spring:
   data:
     mongodb:
       host: 127.0.0.1
       port: 27017
       database: blog_db
+  application:
+    name: blog-service
+server:
+  port: 0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8781/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info
